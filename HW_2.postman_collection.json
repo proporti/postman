@@ -1,0 +1,146 @@
+{
+	"info": {
+		"_postman_id": "eae7d47f-2b09-467c-a705-b56ee4120ac3",
+		"name": "HW_2",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "first",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"//1. Отправить запрос.",
+							"//2. Статус код 200",
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"//3. Проверить, что в body приходит правильный string.",
+							"pm.test(\"Correct string\", function () {",
+							"    pm.expect(pm.response.text()).to.include(\"This is the first responce from server!\");",
+							"});",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://162.55.220.72:5005/first\n",
+					"protocol": "http",
+					"host": [
+						"162",
+						"55",
+						"220",
+						"72"
+					],
+					"port": "5005",
+					"path": [
+						"first\n"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "user_info_3",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"//1. Отправить запрос.",
+							"//2. Статус код 200",
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"//3. Спарсить response body в json.",
+							"var response = JSON.parse(responseBody);",
+							"console.log(responseBody);",
+							"//4. Проверить, что name в ответе равно name s request (name вбить руками.)",
+							"pm.test(\"Correct name\", function () {",
+							"    pm.expect(response.name).to.eql(\"Kate\");",
+							"});",
+							"//5. Проверить, что age в ответе равно age s request (age вбить руками.)",
+							"pm.test(\"Correct age\", function () {",
+							"    pm.expect(response.age).to.eql(\"21\");",
+							"});",
+							"//6. Проверить, что salary в ответе равно salary s request (salary вбить руками.)",
+							"pm.test(\"Correct salary\", function () {",
+							"    pm.expect(response.salary).to.eql(50000);",
+							"});",
+							"//7. Спарсить request.",
+							"var req = request.data;",
+							"console.log(req);",
+							"//8. Проверить, что name в ответе равно name s request (name забрать из request.)",
+							"pm.test(\"Correct name_1\", function () {",
+							"    pm.expect(response.name).to.eql(req.name);",
+							"});",
+							"//9. Проверить, что age в ответе равно age s request (age забрать из request.)",
+							"pm.test(\"Correct age_1\", function () {",
+							"    pm.expect(response.age).to.eql(req.age);",
+							"});",
+							"//10. Проверить, что salary в ответе равно salary s request (salary забрать из request.)",
+							"pm.test(\"Correct salary_1\", function () {",
+							"    pm.expect(response.salary).to.eql(1*(req.salary));",
+							"});",
+							"//11. Вывести в консоль параметр family из response.",
+							"console.log(response.family);",
+							"//12. Проверить что u_salary_1_5_year в ответе равно salary*4 (salary забрать из request)",
+							"pm.test(\"Correct salary_2\", function () {",
+							"    pm.expect(response.family.u_salary_1_5_year).to.eql(req.salary*4);",
+							"});",
+							"",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "name",
+							"value": "Kate",
+							"type": "text"
+						},
+						{
+							"key": "age",
+							"value": "21",
+							"type": "text"
+						},
+						{
+							"key": "salary",
+							"value": "50000",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://162.55.220.72:5005/user_info_3\n",
+					"protocol": "http",
+					"host": [
+						"162",
+						"55",
+						"220",
+						"72"
+					],
+					"port": "5005",
+					"path": [
+						"user_info_3\n"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
